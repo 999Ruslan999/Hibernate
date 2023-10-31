@@ -24,7 +24,7 @@ public class App {
             session.beginTransaction();
 
             Person person = session.get(Person.class, 9);
-            System.out.println("Получили человека");
+
             System.out.println(person);
 
 
