@@ -22,7 +22,7 @@ public class Person {
     private int age;
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @OneToMany(mappedBy = "owner" )
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Item> items;
 
 

@@ -18,18 +18,15 @@ public class App {
         Configuration configuration =  new Configuration().addAnnotatedClass(Person.class).addAnnotatedClass(Item.class);
 
         SessionFactory sessionFactory =  configuration.buildSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
 
-        try {
-
+        try (sessionFactory) {
+            Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Person person = new Person("Test cascadind", 30);
-            person.addItem(new Item("Item 1"));
-            person.addItem(new Item("Item 2"));
-            person.addItem(new Item("Item 3"));
+            Person person = session.get(Person.class, 9);
+            System.out.println("Получили человека");
+            System.out.println(person);
 
-           session.save(person);
 
 
 
@@ -40,9 +37,6 @@ public class App {
 
             session.getTransaction().commit();
 
-
-        } finally {
-            sessionFactory.close();
         }
     }
 }
